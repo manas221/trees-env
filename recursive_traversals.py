@@ -1,8 +1,10 @@
 from tree import TreeNode
 from collections import deque
 
+
 def postorder(node: type[TreeNode]) -> type[list]:
     lst = []
+
     def helper(node: type[TreeNode]):
         if node == None:
             return
@@ -12,9 +14,11 @@ def postorder(node: type[TreeNode]) -> type[list]:
         return
     helper(node)
     return lst
+
 
 def inorder(node: type[TreeNode]) -> type[list]:
     lst = []
+
     def helper(node: type[TreeNode]):
         if node == None:
             return
@@ -24,9 +28,11 @@ def inorder(node: type[TreeNode]) -> type[list]:
         return
     helper(node)
     return lst
+
 
 def preorder(node: type[TreeNode]) -> type[list]:
     lst = []
+
     def helper(node: type[TreeNode]):
         if node == None:
             return
@@ -37,8 +43,10 @@ def preorder(node: type[TreeNode]) -> type[list]:
     helper(node)
     return lst
 
+
 def levelorder(node: type[TreeNode]) -> type[list]:
     traversal = []
+
     def helper(lst: type[deque]):
         if len(lst) == 0:
             return
@@ -56,5 +64,3 @@ def levelorder(node: type[TreeNode]) -> type[list]:
     q.append(node)
     helper(q)
     return traversal
-        
-        

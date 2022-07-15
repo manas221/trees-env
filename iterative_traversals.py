@@ -2,6 +2,7 @@ from importlib.abc import Traversable
 from tree import TreeNode
 from collections import deque
 
+
 def levelorder(node: type[TreeNode]) -> type[list]:
     """
         DS used : Queue FIFO
@@ -28,6 +29,7 @@ def levelorder(node: type[TreeNode]) -> type[list]:
             q.append(item.left)
             q.append(item.right)
     return traversal
+
 
 def inorder(node: type[TreeNode]) -> type[list]:
     """
@@ -62,6 +64,7 @@ def inorder(node: type[TreeNode]) -> type[list]:
             break
     return traversal
 
+
 def preorder(node: type[TreeNode]) -> type[list]:
     # <root><left><right>
     """
@@ -86,7 +89,8 @@ def preorder(node: type[TreeNode]) -> type[list]:
             stack.append(curr.right)
             stack.append(curr.left)
     return traversal
-        
+
+
 def postorder(node: type[TreeNode]) -> type[list]:
     # <left><right><root>
     """
@@ -122,8 +126,6 @@ def postorder(node: type[TreeNode]) -> type[list]:
             traversal.append(curr.val)
             st1.append(curr.left)
             st1.append(curr.right)
-            
-    
-    
+
     reverse_array()
     return traversal

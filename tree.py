@@ -1,8 +1,9 @@
 from collections import deque
 from typing import List
 
+
 class TreeNode:
-    def __init__(self ,val ,left=None ,right=None) -> None:
+    def __init__(self, val, left=None, right=None) -> None:
         self.val = val
         self.left = left
         self.right = right
@@ -21,21 +22,20 @@ def construct_tree_from_list(data: type[List]) -> type[TreeNode]:
         if node == None:
             continue
 
-
         node.left = None if data[cnt] == None else TreeNode(data[cnt])
         cnt += 1
         q.append(node.left)
         if cnt >= n:
             break
 
-        
         node.right = None if data[cnt] == None else TreeNode(data[cnt])
         cnt += 1
         q.append(node.right)
         if cnt >= n:
-            break 
-        
+            break
+
     return root
+
 
 """
     There are two formats for array form of tree
