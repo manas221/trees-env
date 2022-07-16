@@ -1,4 +1,3 @@
-from importlib.abc import Traversable
 from tree import TreeNode
 from collections import deque
 

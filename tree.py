@@ -1,5 +1,5 @@
 from collections import deque
-from typing import List
+from typing import List, Optional
 
 
 class TreeNode:
@@ -9,7 +9,7 @@ class TreeNode:
         self.right = right
 
 
-def construct_tree_from_list(data: type[List]) -> type[TreeNode]:
+def construct_tree_from_list(data: type[List]) -> Optional[type[TreeNode]]:
     n = len(data)
     if n < 1:
         return TreeNode(None)
