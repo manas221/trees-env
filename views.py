@@ -1,5 +1,4 @@
 from collections import deque
-from winreg import REG_OPTION_OPEN_LINK
 from tree import TreeNode
 
 
@@ -76,5 +75,31 @@ def left_view_recursive(root: type[TreeNode]) -> type[list]:
     has more nodes on either side, then the algorithm fails as the vertical order is reached first. 
     So, iterative(level order is best used)
 """
+
+def top_view_iterative(root: type[TreeNode]) -> type[list]:
+    left = []
+    right = []
+    center = root.val
+    current = deque()
+    current.append((root ,0))
+    while len(current) > 0:
+        t = len(current)
+        for _ in range(t):
+            node ,pos = current.popleft()
+            if node is None:
+                continue
+            current.append((node.left ,pos-1))
+            if node.left is not None:
+                if abs(pos-1) == len(left)+1:
+                    left.append(node.left.val)
+            
+            current.append((node.right ,pos+1))
+            if node.right is not None:
+                if pos+1 == len(right)+1:
+                    right.append(node.right.val)
+    
+    left.reverse()
+    left.append(center)
+    return left + right
 
 
