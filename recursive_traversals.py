@@ -1,5 +1,7 @@
+from math import inf
 from tree import TreeNode
-from collections import deque
+import bisect
+from collections import deque ,OrderedDict
 
 
 def postorder(node: type[TreeNode]) -> type[list]:
@@ -64,3 +66,30 @@ def levelorder(node: type[TreeNode]) -> type[list]:
     q.append(node)
     helper(q)
     return traversal
+
+def vertical_order(root: type[TreeNode]) -> type[list[list]]:
+    # Vorder : {depth : [values]}
+    od = OrderedDict()
+
+    def helper(node: type[TreeNode] ,Vorder: int ,depth: int):
+        if node is None:
+            return
+        helper(node.left ,Vorder-1 ,depth+1)
+        if Vorder in od.keys():
+            if depth in od[Vorder].keys():
+                bisect.insort(od[Vorder][depth] ,node.val)
+            else:
+                od[Vorder][depth] = [node.val]
+        else:
+            od[Vorder] = OrderedDict()
+            od[Vorder][depth] = [node.val]
+        helper(node.right ,Vorder+1 ,depth+1)
+
+    helper(root ,0 ,0)
+    sol = []
+    for k ,v in sorted(od.items()):
+        temp = []
+        for k ,vl in sorted(v.items()):
+            temp += vl
+        sol.append(temp)
+    return sol
