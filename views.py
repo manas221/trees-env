@@ -1,4 +1,5 @@
 from collections import deque
+from typing import OrderedDict
 from tree import TreeNode
 
 
@@ -98,5 +99,31 @@ def top_view_iterative(root: type[TreeNode]) -> type[list]:
             q.append((node.right ,line+1))
 
     for k ,v in mpp.items():
+        ans.append(v)
+    return ans
+
+def bottomview(root: type[TreeNode]) -> type[list]:
+    '''
+    Simple pointers for bottom view:
+    -> output should be from left to right ,-ve horizontal level to +ve horizontal level
+    -> if we go with recursive we have to take care of depth too, which becomes a bit complicated, but doable
+    -> instead go with level order traversal and while inserting current node's childeren, take care of 
+        horizontal level
+    '''
+    d = OrderedDict()
+    q = deque()
+    q.append((root ,0))
+    ans = []
+    while len(q) > 0:
+        currlen = len(q)
+        for _ in range(currlen):
+            node ,hlvl = q.popleft()
+            if node is None:
+                continue
+            d[hlvl] = node.val
+            q.append((node.left ,hlvl-1))
+            q.append((node.right ,hlvl+1))
+    
+    for k ,v in sorted(d.items()):
         ans.append(v)
     return ans
