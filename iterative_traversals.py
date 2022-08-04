@@ -159,3 +159,65 @@ def vertical_order(root: type[TreeNode]) -> type[list[list]]:
             temp += vl
         sol.append(temp)
     return sol
+
+def spiral_order_queue(root: type[TreeNode]) -> type[list]:
+    spiral = []
+    
+    qleft = deque()    # l2r
+    qright = deque()   # r2l
+    flag = 0    # 0 l2r ,1 r2l
+    qleft.append(root)
+    while len(qleft) > 0 or len(qright) > 0:
+        if flag == 0:
+            currlen = len(qleft)
+            for _ in range(currlen):
+                node = qleft.popleft()
+                if node is None:
+                    continue
+                spiral.append(node.val)
+                # print(node.val)
+                qright.append(node.left)
+                qright.append(node.right)
+            flag = 1
+        if flag == 1:
+            currlen = len(qright)
+            for _ in range(currlen):
+                node = qright.pop()
+                if node is None:
+                    continue
+                spiral.append(node.val)
+                # print(node.val)
+                qleft.appendleft(node.right)
+                qleft.appendleft(node.left)
+            flag = 0
+    return spiral
+    
+def sprial_order_stacks(root: type[TreeNode]) -> type[list]:
+    spiral = []
+
+    stleft = deque()
+    stright = deque()
+
+    stleft.append(root)
+    flag = 0
+
+    while len(stleft) > 0 or len(stright) > 0:
+        if flag == 0:
+            while len(stleft) > 0:
+                node = stleft.pop()
+                if node is None:
+                    continue
+                spiral.append(node.val)
+                stright.append(node.left)
+                stright.append(node.right)
+            flag = 1
+        if flag == 1:
+            while len(stright) > 0:
+                node = stright.pop()
+                if node is None:
+                    continue
+                spiral.append(node.val)
+                stleft.append(node.right)
+                stleft.append(node.left)
+            flag = 0
+    return spiral
